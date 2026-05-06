@@ -1,0 +1,44 @@
+<% layout("/layouts/boilerplate") %>
+
+<h3 class="mb-4">Your Wishlist ❤️</h3>
+
+<% if(listings.length === 0) { %>
+
+  <div class="text-center mt-5">
+    <h4>No items in wishlist 😢</h4>
+    <a href="/listings" class="btn btn-dark add-btn mt-3">Explore Listings</a>
+  </div>
+
+<% } else { %>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+
+  <% for(let listing of listings) { %>
+
+    <div class="col">
+      <div class="card listing-card position-relative">
+
+        <!-- ❤️ Remove Button -->
+        <button class="wishlist-btn" data-id="<%= listing._id %>">
+  <i class="fa-solid fa-heart text-danger"></i>
+</button>
+
+        <a href="/listings/<%= listing._id %>" class="listing-link">
+          <img src="<%= listing.image.url %>" 
+               class="card-img-top"
+               style="height: 18rem; object-fit: cover;" />
+
+          <div class="card-body">
+            <h5><%= listing.title %></h5>
+            <p>₹ <%= listing.price.toLocaleString("en-IN") %> / night</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  <% } %>
+
+</div>
+
+<% } %>

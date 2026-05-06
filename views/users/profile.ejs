@@ -1,0 +1,50 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="profile-card mt-5">
+
+  <h3><%= currUser.username %></h3>
+  <p><%= currUser.email %></p>
+
+  <hr>
+
+  <!-- Wishlist -->
+  <a href="/listings/wishlist" class="btn btn-outline-dark mb-2 whishlist-btn">
+    ❤️ My Wishlist
+  </a>
+
+  <!-- Add listing -->
+  <a href="/listings/new" class="btn btn-outline-primary mb-2">
+    ➕ Add Listing
+  </a>
+
+  <!-- Logout -->
+  <a href="/logout" class="btn btn-danger">
+    Logout
+  </a>
+
+</div>
+
+<hr>
+
+<h4 class="mt-4">My Listings</h4>
+
+<div class="row mt-3">
+  <% listings.forEach(listing => { %>
+
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <img src="<%= listing.image.url %>" class="card-img-top" style="height:200px; object-fit:cover;">
+        
+        <div class="card-body">
+          <h5><%= listing.title %></h5>
+          <p>₹ <%= listing.price %></p>
+
+          <a href="/listings/<%= listing._id %>" class="btn btn-sm btn-dark whishlist-btn">
+            View
+          </a>
+        </div>
+      </div>
+    </div>
+
+  <% }) %>
+</div>

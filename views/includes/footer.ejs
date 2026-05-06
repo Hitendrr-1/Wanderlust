@@ -1,0 +1,43 @@
+<footer>
+  <div class="f-info">
+    <div class="f-info-socials">
+      <i class="fa-brands fa-square-facebook"></i>
+      <i class="fa-brands fa-instagram"></i>
+      <i class="fa-brands fa-linkedin"></i>
+    </div>
+
+    <div class="f-info-brand">
+      &copy; Wanderlust Private Limited
+    </div>
+
+    <div class="f-info-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile Bottom Navbar -->
+<div class="mobile-bottom-nav">
+  <a href="/listings" class="nav-item active">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span>Explore</span>
+  </a>
+
+ <a href="/listings/wishlist" class="nav-item active">
+    <i class="fa-regular fa-heart"></i>
+    <span>Wishlist</span>
+  </a>
+
+  <% if(!currUser) { %>
+    <a href="/login" class="nav-item">
+      <i class="fa-regular fa-user"></i>
+      <span>Login</span>
+    </a>
+  <% } else { %>
+    <a href="/profile" class="nav-item">
+      <i class="fa-regular fa-user"></i>
+      <span>Profile</span>
+    </a>
+  <% } %>
+</div>

@@ -1,0 +1,142 @@
+<style>
+.navbar {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* SEARCH */
+.search-form {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+}
+
+.search-btn {
+  background-color: #fe424d;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.search-btn i {
+  margin-right: 5px;
+}
+
+.search-btn:hover {
+  background-color: #fe424d;
+  color: #fff;
+}
+
+.search-inp {
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* FIX NAV STRUCTURE */
+.container-fluid {
+  position: relative;
+}
+
+/* MOBILE FIX */
+@media (max-width: 992px) {
+  .search-form {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .container-fluid {
+    flex-wrap: wrap;
+  }
+}
+</style>
+
+<nav class="navbar navbar-light bg-body-tertiary border sticky-top">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+
+    <!-- LEFT -->
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand" href="/listings">
+        <i class="fa-regular fa-compass"></i>
+      </a>
+
+      <a class="nav-link ms-2 d-none d-md-inline" href="/listings">
+        Explore
+      </a>
+    </div>
+
+    <!-- CENTER (PERFECT CENTER) -->
+    <form class="d-flex search-form" role="search" method="GET" action="/listings">
+      <input 
+        class="form-control me-2 search-inp" 
+        type="search" 
+        name="search"
+        placeholder="Search destinations..."
+        value="<%= typeof search !== 'undefined' ? search : '' %>">
+      <button class="btn search-btn" type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i> Search
+      </button>
+    </form>
+
+   <!-- RIGHT -->
+<div class="d-flex align-items-center gap-3">
+
+  <% if(currUser) { %>
+    <a href="/bookings" class="nav-link d-none d-lg-block">My Bookings</a>
+  <% } %>
+
+  <% if(currUser && currUser.role === "host") { %>
+    <a  href="/bookings/owner" class="nav-link d-none d-lg-block">Host Dashboard</a>
+    <a href="/listings/new" class="host-btn d-none d-sm-block">Add Listing</a>
+  <% } else { %>
+    <a href="/become-host" class="host-btn d-none d-sm-block">Become a host</a>
+  <% } %>
+
+  <button class="navbar-toggler ms-2" type="button" 
+    data-bs-toggle="offcanvas" 
+    data-bs-target="#mobileMenu">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+
+    </div>
+
+  </div>
+</nav>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
+
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+
+  <div class="offcanvas-body">
+
+    <% if(currUser) { %>
+
+      <% if(currUser.role === "host") { %>
+        <a class="nav-link" href="/bookings/owner">Host Dashboard</a>
+        <a class="nav-link" href="/listings/new">Add Listing</a>
+      <% } else { %>
+        <a class="nav-link" href="/become-host">Become a host</a>
+      <% } %>
+
+      <a href="/listings/wishlist" class="nav-link">Wishlist</a>
+      <a class="nav-link" href="/profile">Profile</a>
+      <a class="nav-link" href="/logout"><b>Log out</b></a>
+      <a class="nav-link" href="/bookings">My Bookings</a>
+
+    <% } else { %>
+
+      <a class="nav-link" href="/signup"><b>Sign Up</b></a>
+      <a class="nav-link" href="/login"><b>Log in</b></a>
+
+    <% } %>
+
+  </div>
+
+</div>

@@ -1,0 +1,26 @@
+<% layout("/layouts/boilerplate") %>
+
+<h3 class="mt-4">Your Bookings</h3>
+ <% if(bookings.length === 0) { %>
+    <div class="alert alert-info">
+      No bookings yet.   Booking now
+    </div>
+  <% } %>
+<div class="row">
+ <% for(let b of bookings) { %>
+
+  <div class="card col-4 m-2 p-3">
+    <h5><%= b.listing.title %></h5>
+    <p>Check-in: <%= b.checkIn.toDateString() %></p>
+    <p>Check-out: <%= b.checkOut.toDateString() %></p>
+    <p>Total: ₹<%= b.totalPrice %></p>
+    
+    <form action="/bookings/<%= b._id %>?_method=DELETE" method="POST">
+      <button class="btn btn-danger btn-sm">Cancel Booking</button>
+    </form>
+
+  </div>
+
+ <% } %>  
+</div>
+<br><br>
