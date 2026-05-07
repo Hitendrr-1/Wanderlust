@@ -89,6 +89,11 @@ app.use((req, res, next) => {
   res.locals.search = req.query.search;
   next();
 });
+
+// Home Route
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
  
 app.use("/listings", listingRouter); 
 app.use("/listings/:id/reviews", reviewRouter);
